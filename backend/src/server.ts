@@ -10,5 +10,5 @@ app.use(bodyParser.json());
 app.use('/api/board', boardRouter);
 
 app.listen(4000, () => {
-  console.log('Backend server running on http://localhost:4000');
+    console.log('Backend running on http://localhost:4000');
 });
