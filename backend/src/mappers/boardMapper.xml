@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapper namespace="Board">
+    <select id="selectBoardList" resultType="map">
+        SELECT id, title, content, writer, created_at
+        FROM board
+        ORDER BY id DESC
+    </select>
+
+    <insert id="insertBoard">
+        INSERT INTO board (title, content, writer, created_at)
+        VALUES (#{title}, #{content}, #{writer}, NOW())
+    </insert>
+</mapper>
