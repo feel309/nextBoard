@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react';
 type Board = { id: number; title: string; writer: string; created_at: string };
 
 export default function Home() {
-    const [boards, setBoards] = useState<Board[]>([]);
+    const [boards, setBoards] = useState<Board[]>([]); // 상태 정의 (게시판 목록)
 
     useEffect(() => {
+        // 컴포넌트 마운트 시 백엔드 API 호출
         fetch('http://localhost:4000/api/board')
             .then(res => res.json())
             .then(data => setBoards(data));
-    }, []);
+    }, []); // [] → 최초 1회 실행
 
     return (
         <div className="container">

@@ -2,19 +2,19 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function Write() {
-    const router = useRouter();
+    const router = useRouter(); // 페이지 이동 제어
     const [title, setTitle] = useState('');
     const [writer, setWriter] = useState('');
     const [content, setContent] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+        e.preventDefault(); // 새로고침 방지
         await fetch('http://localhost:4000/api/board', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title, writer, content })
         });
-        router.push('/');
+        router.push('/'); // 작성 후 목록으로 이동
     };
 
     return (

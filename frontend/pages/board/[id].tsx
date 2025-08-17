@@ -14,10 +14,13 @@ export default function BoardDetail() {
     const { id } = router.query;
     const [board, setBoard] = useState<Board | null>(null);
     const [editMode, setEditMode] = useState(false);
+
+    // 수정 입력값 상태
     const [title, setTitle] = useState('');
     const [writer, setWriter] = useState('');
     const [content, setContent] = useState('');
 
+    // 상세조회 API 호출
     useEffect(() => {
         if (id) {
             fetch(`http://localhost:4000/api/board/${id}`)
@@ -31,6 +34,7 @@ export default function BoardDetail() {
         }
     }, [id]);
 
+    // 수정
     const handleUpdate = async () => {
         await fetch(`http://localhost:4000/api/board/${id}`, {
             method: 'PUT',
@@ -38,9 +42,10 @@ export default function BoardDetail() {
             body: JSON.stringify({ title, writer, content })
         });
         setEditMode(false);
-        router.reload();
+        router.reload(); // 새로고침
     };
 
+    // 삭제
     const handleDelete = async () => {
         if (!confirm('정말 삭제하시겠습니까?')) return;
         await fetch(`http://localhost:4000/api/board/${id}`, { method: 'DELETE' });
